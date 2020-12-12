@@ -1,0 +1,211 @@
+:root {
+	--color-danger: #ef233c;
+	--color-take: #3a86ff;
+	--color-download: #8338ec;
+}
+html {
+	box-sizing: border-box;
+	font-size: 62.5%;
+}
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+body {
+	font-family: system-ui, sans-serif;
+	font-size: 1.6rem;
+	margin: 0;
+	overflow: hidden;
+}
+button {
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+.app {
+	height: 100vh;
+	width: 100vw;
+	display: grid;
+	grid-template-columns: 2.5rem repeat(10, 1fr) 2.5rem;
+	grid-template-rows: 2.5rem repeat(6, 1fr) 2.5rem;
+}
+.camera {
+	height: 100%;
+	object-fit: cover;
+	width: 100%;
+	grid-row: 1 / -1;
+	grid-column: 1 / -1;
+	transform: scaleX(-1);
+}
+.photo-taker {
+	display: none;
+}
+.btn {
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 50%;
+	cursor: pointer;
+	color: #fff;
+	font-size: 1.6rem;
+	height: 5rem;
+	width: 5rem;
+	z-index: 1;
+	grid-row: -3 / span 1;
+	align-self: end;
+	justify-self: center;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.2s ease, color 0.2s ease, visibility 0.2s -0.2s ease;
+}
+.btn:hover {
+	transform: scale(1.05);
+}
+.btn:focus {
+	outline: none;
+	transform: translateY(-2rem) !important;
+}
+@media (min-width: 37.5em) {
+	.btn {
+		font-size: 2.2rem;
+		height: 6rem;
+		width: 6rem;
+	}
+}
+@media (min-width: 56.25em) {
+	.btn {
+		font-size: 2.5rem;
+		height: 7rem;
+		width: 7rem;
+	}
+}
+.btn--delete:hover {
+	color: var(--color-danger);
+}
+.btn--take:hover {
+	color: var(--color-take);
+	transform: scale(1.15);
+}
+.btn--download:hover {
+	color: var(--color-download);
+}
+.btn--delete {
+	grid-column: 2 / span 2;
+	justify-self: start;
+}
+.btn--delete,
+.btn--download {
+	transform: translateY(15rem);
+	visibility: hidden;
+}
+.btn--delete.show,
+.btn--download.show {
+	transform: translateY(0);
+	visibility: visible;
+}
+.btn--take {
+	grid-column: 6 / span 2;
+	transform: scale(1.1);
+}
+.btn--take-unavailable {
+	visibility: hidden;
+}
+.btn--download {
+	grid-column: -2 / -4;
+	justify-self: end;
+}
+.photo__preview {
+	border: 1px solid #fff;
+	cursor: pointer;
+	display: block;
+	height: 6.1rem;
+	object-fit: cover;
+	width: 6.1rem;
+	grid-row: 2 / span 2;
+	grid-column: -2 / -4;
+	place-self: start end;
+	z-index: 1;
+	transform: scaleX(-1);
+	transition: transform 0.2s cubic-bezier(0, 0, 1, 1.2), visibility 0.2s ease;
+}
+.photo__preview--unavailable {
+	visibility: hidden;
+	transform: scaleX(-1) translateX(-12rem);
+}
+@media (min-width: 56.25em) {
+	.photo__preview {
+		height: 8.1rem;
+		width: 8.1rem;
+	}
+}
+.modal__overlay {
+	grid-row: 1 / -1;
+	grid-column: 1 / -1;
+	background-color: rgba(0, 0, 0, 0.4);
+	height: 100%;
+	padding: 2.5rem 3rem;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+	animation: zoom-in 0.4s ease-in forwards;
+}
+.modal__overlay.out {
+	animation-name: zoom-out;
+}
+@media (min-width: 56.25em) {
+	.modal__overlay {
+		padding: 4rem 8rem;
+	}
+}
+.modal__img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	object-fit: cover;
+	user-select: none;
+}
+
+.loader__overlay {
+	grid-row: 1 / -1;
+	grid-column: 1 / -1;
+	background-color: rgba(0, 0, 0, 0.4);
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+}
+.loader {
+	border-top: 0.6rem solid var(--color-download);
+	border-radius: 50%;
+	height: 10rem;
+	width: 10rem;
+	animation: spin 0.8s linear infinite;
+}
+@keyframes zoom-in {
+	from {
+		transform: scale(0);
+	}
+	to {
+		transform: scale(1);
+	}
+}
+@keyframes zoom-out {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(0);
+	}
+}
+@keyframes spin {
+	to {
+		transform: rotate(0deg);
+	}
+	from {
+		transform: rotate(360deg);
+	}
+}
