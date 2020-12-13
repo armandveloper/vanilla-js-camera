@@ -9,6 +9,6 @@ This is a personal project of web camera.
 * Preview small and big photo
 
 
-# Todo
+## Todo
 * Improve the features in a mobile device, such as: flip camera, share
 * Conver to a PWA (offline, etc)

@@ -1,24 +1,9 @@
-const $app = document.getElementById('app'),
-	$camera = document.getElementById('camera'),
+const $camera = document.getElementById('camera'),
 	$canvas = document.getElementById('photo-taker'),
 	$btnTakePhoto = document.getElementById('btn-take-photo'),
 	$btnDelete = document.getElementById('btn-delete'),
 	$btnDownload = document.getElementById('btn-download'),
 	$photoPreview = document.getElementById('photo-preview');
-
-const cameraConstraints = {
-	audio: false,
-	video: {
-		width: { min: 1024, ideal: 1280, max: 1920 },
-		height: { min: 576, ideal: 720, max: 1080 },
-		facingMode: 'user',
-	},
-};
-
-let stream = null,
-	width = null,
-	height = null,
-	isPhotoAvailable = false;
 
 const showSecondaryButtons = () => {
 	if (!isPhotoAvailable) return;
@@ -77,30 +62,15 @@ const showBigPhoto = () => {
 	});
 };
 
-const init = async () => {
-	if (navigator.mediaDevices) {
-		try {
-			stream = await navigator.mediaDevices.getUserMedia(
-				cameraConstraints
-			);
-			$camera.srcObject = stream;
-			$camera.onloadedmetadata = (e) => {
-				document.getElementById('loader').remove();
-				$btnTakePhoto.classList.remove('btn--take-unavailable');
-				$camera.play();
-				width = $camera.videoWidth;
-				height = $camera.videoHeight;
-				$canvas.width = width;
-				$canvas.height = height;
-				$btnTakePhoto.addEventListener('click', takePhoto);
-				$btnDelete.addEventListener('click', deletePhoto);
-				$btnDownload.addEventListener('click', downloadPhoto);
-				$photoPreview.addEventListener('click', showBigPhoto);
-			};
-		} catch (err) {
-			console.log(err);
-		}
-	}
+export {
+	$camera,
+	$canvas,
+	$btnTakePhoto,
+	$btnDelete,
+	$btnDownload,
+	$photoPreview,
+	showBigPhoto,
+	takePhoto,
+	downloadPhoto,
+	deletePhoto,
 };
-
-init();
