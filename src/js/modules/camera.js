@@ -47,7 +47,7 @@ const downloadPhoto = () => {
 	link.click();
 };
 
-const showBigPhoto = () => {
+const showBigPhoto = (width, height) => {
 	const $modalContainer = document.createElement('div');
 	$modalContainer.className = 'modal__overlay';
 	const $bigImg = new Image(width, height);

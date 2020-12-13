@@ -45,7 +45,9 @@ const init = async () => {
 				);
 				$btnDelete.addEventListener('click', deletePhoto);
 				$btnDownload.addEventListener('click', downloadPhoto);
-				$photoPreview.addEventListener('click', showBigPhoto);
+				$photoPreview.addEventListener('click', () =>
+					showBigPhoto(width, height)
+				);
 			};
 		} catch (err) {
 			console.log(err);
