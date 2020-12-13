@@ -38,6 +38,10 @@
 				grid-template-columns: 2.5rem repeat(10, 1fr) 2.5rem;
 				grid-template-rows: 2.5rem repeat(6, 1fr) 2.5rem;
 			}
+			.photo__preview--unavailable {
+				visibility: hidden;
+				transform: scaleX(-1) translateX(-12rem);
+			}
 			.loader__overlay {
 				grid-row: 1 / -1;
 				grid-column: 1 / -1;

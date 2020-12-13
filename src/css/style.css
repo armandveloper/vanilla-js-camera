@@ -96,10 +96,6 @@
 	transform: scaleX(-1);
 	transition: transform 0.2s cubic-bezier(0, 0, 1, 1.2), visibility 0.2s ease;
 }
-.photo__preview--unavailable {
-	visibility: hidden;
-	transform: scaleX(-1) translateX(-12rem);
-}
 @media (min-width: 56.25em) {
 	.photo__preview {
 		height: 8.1rem;

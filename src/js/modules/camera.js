@@ -5,6 +5,8 @@ const $camera = document.getElementById('camera'),
 	$btnDownload = document.getElementById('btn-download'),
 	$photoPreview = document.getElementById('photo-preview');
 
+let isPhotoAvailable = false;
+
 const showSecondaryButtons = () => {
 	if (!isPhotoAvailable) return;
 	$btnDelete.classList.add('show');
@@ -17,7 +19,7 @@ const hideSecondaryButtons = () => {
 	$btnDownload.classList.remove('show');
 };
 
-const takePhoto = () => {
+const takePhoto = (width, height) => {
 	const sound = new Audio('audio/sound.mp3');
 	sound.play();
 	const ctx = $canvas.getContext('2d');

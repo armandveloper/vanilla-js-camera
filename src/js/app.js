@@ -10,8 +10,7 @@ const cameraConstraints = {
 
 let stream = null,
 	width = null,
-	height = null,
-	isPhotoAvailable = false;
+	height = null;
 
 const init = async () => {
 	if (navigator.mediaDevices) {
@@ -41,7 +40,9 @@ const init = async () => {
 				height = $camera.videoHeight;
 				$canvas.width = width;
 				$canvas.height = height;
-				$btnTakePhoto.addEventListener('click', takePhoto);
+				$btnTakePhoto.addEventListener('click', () =>
+					takePhoto(width, height)
+				);
 				$btnDelete.addEventListener('click', deletePhoto);
 				$btnDownload.addEventListener('click', downloadPhoto);
 				$photoPreview.addEventListener('click', showBigPhoto);
