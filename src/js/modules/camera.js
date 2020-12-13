@@ -1,4 +1,5 @@
-const $camera = document.getElementById('camera'),
+const $app = document.getElementById('app'),
+	$camera = document.getElementById('camera'),
 	$canvas = document.getElementById('photo-taker'),
 	$btnTakePhoto = document.getElementById('btn-take-photo'),
 	$btnDelete = document.getElementById('btn-delete'),
