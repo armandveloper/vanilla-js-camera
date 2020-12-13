@@ -9,4 +9,4 @@ module.exports=function(n){return new Promise(function(e,o){var r=document.creat
 },{}],0:[function(require,module,exports) {
 var b=require("TUK3");b.register("js",require("Yi9z"));
 },{}]},{},[0,"QdeU"], null)
-//# sourceMappingURL=/app.7bcafab4.js.map
+//# sourceMappingURL=/vanilla-js-camera/app.7bcafab4.js.map
