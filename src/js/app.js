@@ -37,11 +37,14 @@ const init = async () => {
 			} = await import('./modules/camera.js');
 			$camera.srcObject = stream;
 			$camera.onloadedmetadata = () => {
+				if (cameraMode === 'user') {
+					$camera.classList.add('flip');
+				}
 				document.getElementById('loader').remove();
 				if (!existsFrontCamera) {
 					$btnFlip.remove();
 				} else {
-					$btnFlip.classList.remove('btn--flip-unavailable');
+					$btnFlip.classList.remove('btn--flip--unavailable');
 				}
 				$btnTakePhoto.classList.remove('btn--take-unavailable');
 				$camera.play();
@@ -50,7 +53,7 @@ const init = async () => {
 				$canvas.width = width;
 				$canvas.height = height;
 				$btnTakePhoto.addEventListener('click', () =>
-					takePhoto(width, height)
+					takePhoto(width, height, cameraMode)
 				);
 				if (existsFrontCamera) {
 					$btnFlip.addEventListener('click', () => {

@@ -23,15 +23,22 @@ const hideSecondaryButtons = () => {
 	$btnDownload.classList.remove('show');
 };
 
-const takePhoto = (width, height) => {
+const takePhoto = (width, height, mode) => {
 	const sound = new Audio('audio/sound.mp3');
 	sound.play();
 	const ctx = $canvas.getContext('2d');
-	if (!isCanvasFlipped) {
+	if (!isCanvasFlipped && mode === 'user') {
 		// Flip the canvas, so the image generated is right
 		ctx.translate(width, 0);
 		ctx.scale(-1, 1);
 		isCanvasFlipped = true;
+	} else if (
+		(isCanvasFlipped && mode === 'environment') ||
+		!isCanvasFlipped
+	) {
+		ctx.translate(0, 0);
+		ctx.scale(1, 1);
+		isCanvasFlipped = false;
 	}
 	ctx.drawImage($camera, 0, 0, width, height);
 	const imgData = $canvas.toDataURL('image/jpeg');
@@ -81,6 +88,11 @@ const changeCamera = async (mode, constraints) => {
 		});
 		$camera.srcObject = stream;
 		$camera.onloadedmetadata = () => {
+			if (cameraMode === 'user') {
+				$camera.classList.add('flip');
+			} else {
+				$camera.classList.remove('flip');
+			}
 			$camera.play();
 		};
 	} catch (error) {
