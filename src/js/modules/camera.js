@@ -2,6 +2,7 @@ const $app = document.getElementById('app'),
 	$camera = document.getElementById('camera'),
 	$canvas = document.getElementById('photo-taker'),
 	$btnTakePhoto = document.getElementById('btn-take-photo'),
+	$btnFlip = document.getElementById('btn-flip'),
 	$btnDelete = document.getElementById('btn-delete'),
 	$btnDownload = document.getElementById('btn-download'),
 	$photoPreview = document.getElementById('photo-preview');
@@ -73,10 +74,25 @@ const showBigPhoto = (width, height) => {
 	});
 };
 
+const changeCamera = async (mode, constraints) => {
+	try {
+		const stream = await navigator.mediaDevices.getUserMedia({
+			video: { ...constraints, facingMode: { ideal: mode } },
+		});
+		$camera.srcObject = stream;
+		$camera.onloadedmetadata = () => {
+			$camera.play();
+		};
+	} catch (error) {
+		console.log(err);
+	}
+};
+
 export {
 	$camera,
 	$canvas,
 	$btnTakePhoto,
+	$btnFlip,
 	$btnDelete,
 	$btnDownload,
 	$photoPreview,
@@ -84,4 +100,5 @@ export {
 	takePhoto,
 	downloadPhoto,
 	deletePhoto,
+	changeCamera,
 };

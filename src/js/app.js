@@ -1,9 +1,9 @@
+let existsFrontCamera = false;
+let cameraMode = existsFrontCamera ? 'user' : 'environment';
 const cameraConstraints = {
-	audio: false,
-	video: {
-		width: { min: 1024, ideal: 1280, max: 1920 },
-		height: { min: 576, ideal: 720, max: 1080 },
-	},
+	width: { min: 1024, ideal: 1280, max: 1920 },
+	height: { min: 576, ideal: 720, max: 1080 },
+	facingMode: { ideal: cameraMode },
 };
 
 let stream = null,
@@ -13,17 +13,19 @@ let stream = null,
 const init = async () => {
 	if (navigator.mediaDevices) {
 		try {
-			const devices = await navigator.mediaDevices.enumerateDevices();
-			console.log(devices.filter((dev) => dev.kind === 'videoinput'));
-			return;
-			stream = await navigator.mediaDevices.getUserMedia(
-				cameraConstraints
-			);
+			let devices = await navigator.mediaDevices.enumerateDevices();
+			devices = devices.filter((dev) => dev.kind === 'videoinput');
+			existsFrontCamera =
+				devices.filter((dev) => dev.label.includes('front')).length > 0;
+			stream = await navigator.mediaDevices.getUserMedia({
+				video: { ...cameraConstraints },
+			});
 			await import('https://kit.fontawesome.com/4500871b95.js');
 			const {
 				$camera,
 				$canvas,
 				$btnTakePhoto,
+				$btnFlip,
 				$btnDelete,
 				$btnDownload,
 				$photoPreview,
@@ -31,10 +33,16 @@ const init = async () => {
 				takePhoto,
 				deletePhoto,
 				downloadPhoto,
+				changeCamera,
 			} = await import('./modules/camera.js');
 			$camera.srcObject = stream;
-			$camera.onloadedmetadata = async (e) => {
+			$camera.onloadedmetadata = () => {
 				document.getElementById('loader').remove();
+				if (!existsFrontCamera) {
+					$btnFlip.remove();
+				} else {
+					$btnFlip.classList.remove('btn--flip-unavailable');
+				}
 				$btnTakePhoto.classList.remove('btn--take-unavailable');
 				$camera.play();
 				width = $camera.videoWidth;
@@ -44,6 +52,13 @@ const init = async () => {
 				$btnTakePhoto.addEventListener('click', () =>
 					takePhoto(width, height)
 				);
+				if (existsFrontCamera) {
+					$btnFlip.addEventListener('click', () => {
+						let mode =
+							cameraMode === 'user' ? 'environment' : 'user';
+						changeCamera(mode, cameraConstraints);
+					});
+				}
 				$btnDelete.addEventListener('click', deletePhoto);
 				$btnDownload.addEventListener('click', downloadPhoto);
 				$photoPreview.addEventListener('click', () =>
