@@ -93,8 +93,7 @@
 	grid-column: -2 / -4;
 	place-self: start end;
 	z-index: 1;
-	transform: scaleX(-1);
-	transition: transform 0.2s cubic-bezier(0, 0, 1, 1.2), visibility 0.2s ease;
+	transition: transform 0.2s ease, visibility 0.2s ease;
 }
 @media (min-width: 56.25em) {
 	.photo__preview {

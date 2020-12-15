@@ -3,7 +3,6 @@ const cameraConstraints = {
 	video: {
 		width: { min: 1024, ideal: 1280, max: 1920 },
 		height: { min: 576, ideal: 720, max: 1080 },
-		facingMode: 'user',
 	},
 };
 
@@ -14,6 +13,9 @@ let stream = null,
 const init = async () => {
 	if (navigator.mediaDevices) {
 		try {
+			const devices = await navigator.mediaDevices.enumerateDevices();
+			console.log(devices.filter((dev) => dev.kind === 'videoinput'));
+			return;
 			stream = await navigator.mediaDevices.getUserMedia(
 				cameraConstraints
 			);

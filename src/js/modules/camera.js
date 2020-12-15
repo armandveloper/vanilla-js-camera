@@ -8,6 +8,8 @@ const $app = document.getElementById('app'),
 
 let isPhotoAvailable = false;
 
+let isCanvasFlipped = false;
+
 const showSecondaryButtons = () => {
 	if (!isPhotoAvailable) return;
 	$btnDelete.classList.add('show');
@@ -24,6 +26,12 @@ const takePhoto = (width, height) => {
 	const sound = new Audio('audio/sound.mp3');
 	sound.play();
 	const ctx = $canvas.getContext('2d');
+	if (!isCanvasFlipped) {
+		// Flip the canvas, so the image generated is right
+		ctx.translate(width, 0);
+		ctx.scale(-1, 1);
+		isCanvasFlipped = true;
+	}
 	ctx.drawImage($camera, 0, 0, width, height);
 	const imgData = $canvas.toDataURL('image/jpeg');
 	$photoPreview.src = imgData;
