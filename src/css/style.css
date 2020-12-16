@@ -38,6 +38,13 @@
 		width: 6rem;
 	}
 }
+@media (min-width: 37.5em) and (orientation: landscape) {
+	.btn {
+		font-size: 2.2rem;
+		height: 4rem;
+		width: 4rem;
+	}
+}
 @media (min-width: 56.25em) {
 	.btn {
 		font-size: 2.5rem;
@@ -92,6 +99,16 @@
 }
 .btn--flip--unavailable {
 	display: none;
+}
+@media (min-width: 37.5em) and (orientation: landscape) {
+	.btn--flip {
+		justify-self: center;
+	}
+}
+@media (min-width: 56.25em) {
+	.btn--flip {
+		justify-self: end;
+	}
 }
 .photo__preview {
 	border: 1px solid #fff;

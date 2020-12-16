@@ -57,9 +57,9 @@ const init = async () => {
 				);
 				if (existsFrontCamera) {
 					$btnFlip.addEventListener('click', () => {
-						let mode =
+						cameraMode =
 							cameraMode === 'user' ? 'environment' : 'user';
-						changeCamera(mode, cameraConstraints);
+						changeCamera(cameraMode, cameraConstraints);
 					});
 				}
 				$btnDelete.addEventListener('click', deletePhoto);
