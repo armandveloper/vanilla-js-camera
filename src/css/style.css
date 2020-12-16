@@ -40,7 +40,7 @@
 }
 @media (min-width: 37.5em) and (orientation: landscape) {
 	.btn {
-		font-size: 2.2rem;
+		font-size: 1.5rem;
 		height: 4rem;
 		width: 4rem;
 	}
@@ -102,12 +102,7 @@
 }
 @media (min-width: 37.5em) and (orientation: landscape) {
 	.btn--flip {
-		justify-self: center;
-	}
-}
-@media (min-width: 56.25em) {
-	.btn--flip {
-		justify-self: end;
+		align-self: start;
 	}
 }
 .photo__preview {

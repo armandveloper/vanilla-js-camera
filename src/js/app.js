@@ -50,11 +50,11 @@ const init = async () => {
 				$camera.play();
 				width = $camera.videoWidth;
 				height = $camera.videoHeight;
-				$canvas.width = width;
-				$canvas.height = height;
-				$btnTakePhoto.addEventListener('click', () =>
-					takePhoto(width, height, cameraMode)
-				);
+				$btnTakePhoto.addEventListener('click', () => {
+					$canvas.width = width;
+					$canvas.height = height;
+					takePhoto(width, height, cameraMode);
+				});
 				if (existsFrontCamera) {
 					$btnFlip.addEventListener('click', () => {
 						cameraMode =
