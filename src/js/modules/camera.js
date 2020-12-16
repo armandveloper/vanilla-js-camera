@@ -88,7 +88,7 @@ const changeCamera = async (mode, constraints) => {
 		});
 		$camera.srcObject = stream;
 		$camera.onloadedmetadata = () => {
-			if (cameraMode === 'user') {
+			if (mode === 'user') {
 				$camera.classList.add('flip');
 			} else {
 				$camera.classList.remove('flip');

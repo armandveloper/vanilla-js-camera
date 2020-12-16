@@ -74,8 +74,9 @@ const init = async () => {
 	}
 };
 
-const handleOrientation = (e) => {
-	console.log(e);
+const handleOrientation = () => {
+	// Change the resolution of the image, so its proportional
+	[width, height] = [height, width];
 };
 
 window.screen.orientation.addEventListener('change', handleOrientation, true);
