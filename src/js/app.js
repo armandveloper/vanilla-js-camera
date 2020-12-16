@@ -37,8 +37,12 @@ const init = async () => {
 			} = await import('./modules/camera.js');
 			$camera.srcObject = stream;
 			$camera.onloadedmetadata = () => {
-				if (cameraMode === 'user') {
+				if (cameraMode === 'user' || !existsFrontCamera) {
 					$camera.classList.add('flip');
+				}
+				if (cameraMode === 'environment' && !existsFrontCamera) {
+					// Fix the mode on desktop
+					cameraMode = 'user';
 				}
 				document.getElementById('loader').remove();
 				if (!existsFrontCamera) {
