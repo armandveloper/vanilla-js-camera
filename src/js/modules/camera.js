@@ -9,8 +9,6 @@ const $app = document.getElementById('app'),
 
 let isPhotoAvailable = false;
 
-let isCanvasFlipped = false;
-
 const showSecondaryButtons = () => {
 	if (!isPhotoAvailable) return;
 	$btnDelete.classList.add('show');

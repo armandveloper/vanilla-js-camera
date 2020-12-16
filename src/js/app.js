@@ -71,6 +71,19 @@ const init = async () => {
 				$photoPreview.addEventListener('click', () =>
 					showBigPhoto(width, height)
 				);
+				const handleOrientation = ({ target }) => {
+					console.log(target);
+					// Change the resolution of the image, so its proportional
+					if (width > height && target.type.includes('landscape')) {
+						return;
+					}
+					[width, height] = [height, width];
+				};
+				window.screen.orientation.addEventListener(
+					'change',
+					handleOrientation,
+					true
+				);
 			};
 		} catch (err) {
 			console.log(err);
@@ -78,10 +91,4 @@ const init = async () => {
 	}
 };
 
-const handleOrientation = () => {
-	// Change the resolution of the image, so its proportional
-	[width, height] = [height, width];
-};
-
-window.screen.orientation.addEventListener('change', handleOrientation, true);
 init();
